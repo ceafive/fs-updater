@@ -2,6 +2,10 @@
   "name": "featuresettings-updater",
   "displayName": "featuresettings-updater",
   "publisher": "ceafive",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceafive/fs-updater.git"
+  },
   "description": "",
   "version": "0.0.1",
   "engines": {
