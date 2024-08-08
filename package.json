@@ -1,13 +1,19 @@
 {
   "name": "featuresettings-updater",
-  "displayName": "featuresettings-updater",
+  "displayName": "Feature Settings Updater",
   "publisher": "ceafive",
   "repository": {
     "type": "git",
     "url": "https://github.com/ceafive/fs-updater.git"
   },
-  "description": "",
-  "version": "0.0.1",
+  "bugs": {
+    "url": "https://github.com/ceafive/fs-updater/issues",
+    "email": "ceafive@gmail.com"
+  },
+  "license": "https://github.com/ceafive/fs-updater/blob/main/LICENSE.md",
+  "homepage": "https://github.com/ceafive/fs-updater/blob/main/README.md",
+  "description": "A Visual Studio Code extension that updates a settings file based on the extension settings.",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.91.0"
   },
@@ -15,17 +21,41 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:json"
+    "onLanguage"
   ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "icon": "images/fs-updater-icon.png",
+  "galleryBanner": {
+    "color": "#c5ddff",
+    "theme": "light"
+  },
+  "preview": true,
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "featuresettings-updater.show",
-        "title": "Update Feature Settings"
+        "title": "Update Feature Settings",
+        "icon": {
+          "light": "images/fs-updater-icon.svg",
+          "dark": "images/fs-updater-icon.svg"
+        }
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "featuresettings-updater.show",
+          "when": "false"
+        }
+      ],
       "explorer/context": [
         {
           "command": "featuresettings-updater.show",
@@ -50,14 +80,16 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
+    "test": "vscode-test",
     "compile": "webpack",
+    "clean": "rm -rf ./dist",
     "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map",
+    "package": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint --fix ./src --ext .js,.jsx,.ts,.tsx"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.0",

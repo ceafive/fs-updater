@@ -20,7 +20,7 @@ const extensionConfig = {
     // the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/
     path: path.resolve(__dirname, "dist"),
     filename: "extension.js",
-    libraryTarget: "commonjs2",
+    libraryTarget: "commonjs",
   },
   externals: {
     vscode: "commonjs vscode", // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
@@ -45,7 +45,30 @@ const extensionConfig = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+          compress: {
+            comparisons: false,
+          },
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "main",
+          test: /\.css$/,
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
   },
   devtool: "hidden-source-map",
   infrastructureLogging: {
@@ -92,7 +115,7 @@ const webviewConfig = {
               presets: [["@babel/preset-env"]],
             },
           },
-          "ts-loader",
+          { loader: "ts-loader", options: { transpileOnly: true, onlyCompileBundledFiles: true } },
         ],
       },
       {
@@ -103,12 +126,42 @@ const webviewConfig = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        extractComments: true,
+        terserOptions: {
+          compress: {
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
+        },
+      }),
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "main",
+          test: /\.css$/,
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
   },
+  // @ts-ignore
   plugins: [new MiniCssExtractPlugin(), new LodashModuleReplacementPlugin()],
   devtool: "hidden-source-map",
-  infrastructureLogging: {
-    level: "log",
+  externals: {
+    // react: "React",
+    // "react-dom": "ReactDOM",
   },
 };
 

@@ -11,5 +11,6 @@ export const register = (context: vscode.ExtensionContext): vscode.Disposable =>
 
   return vscode.commands.registerCommand("featuresettings-updater.show", (uri: vscode.Uri) => {
     createWebviewPanel(context, uri, currentPanel);
+    // currentPanel = createWebviewPanel(context, uri, currentPanel);
   });
 };

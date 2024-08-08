@@ -154,6 +154,13 @@ const App = () => {
               <div className="flex w-1/2">
                 <button
                   disabled={!newData?.length}
+                  className={`${newData?.length ? "bg-red-600" : "bg-gray-400"} text-white px-4 py-2 w-full mr-2`}
+                  onClick={() => setNewData("")}
+                >
+                  Clear
+                </button>
+                <button
+                  disabled={!newData?.length}
                   className={`${newData?.length ? "bg-blue-600" : "bg-gray-400"} text-white px-4 py-2 w-full`}
                   onClick={() =>
                     onAdd({
