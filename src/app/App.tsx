@@ -82,12 +82,6 @@ const App = () => {
     return {};
   }, [selected, realms, json, territory, language]);
 
-  // return (
-  //   <div className="flex flex-col justify-center items-center min-h-screen">
-  //     <h1 className="text-white text-6xl">Loading....</h1>
-  //   </div>
-  // );
-
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen">
@@ -99,8 +93,8 @@ const App = () => {
   return (
     <div className="">
       <h1 className="">Feature Settings Updater</h1>
-      <div className="flex justify-between">
-        <div className="w-6/12">
+      <div className="flex flex-col lg:flex-row justify-between">
+        <div className="w-full lg:w-6/12">
           <div className="flex flex-col w-full">
             <button
               className={`${selected === "Empire" ? "bg-green-800" : "bg-gray-500"} text-white p-2`}
@@ -184,7 +178,7 @@ const App = () => {
           </div>
         </div>
 
-        <div className="w-5/12 justify-end">
+        <div className="w-full lg:w-5/12 lg:justify-end">
           {selected === "Empire" && (
             <EmpireData
               {...{

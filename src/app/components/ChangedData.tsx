@@ -7,9 +7,7 @@ const ChangedData = ({ changedData, databoxRef }: ChangedDataProps) => {
   return (
     <div className="mt-2">
       <h1 className="">Changed Data</h1>
-      <p className="italic text-xs text-center mt-1">
-        If you don't find all data added here, then you have overwritten some
-      </p>
+      <p className="italic text-center mt-1">If you don't find all data added here, then you have overwritten some</p>
       <div>
         <div ref={databoxRef} className="max-h-[500px] overflow-y-scroll border border-gray-100 rounded-lg p-2">
           {Object.entries(changedData)?.map((prop) => {

@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { getConfig, workspaceConfiguration } from "../utils";
 import { createWebviewPanel } from "./panel";
+import { dispose } from "./dispose";
 
 export const register = (context: vscode.ExtensionContext): vscode.Disposable => {
   workspaceConfiguration();
@@ -10,7 +11,17 @@ export const register = (context: vscode.ExtensionContext): vscode.Disposable =>
   let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
   return vscode.commands.registerCommand("featuresettings-updater.show", (uri: vscode.Uri) => {
-    createWebviewPanel(context, uri, currentPanel);
-    // currentPanel = createWebviewPanel(context, uri, currentPanel);
+    currentPanel = createWebviewPanel(context, uri, currentPanel);
+
+    // // Listen for when the panel is disposed
+    currentPanel.onDidDispose(
+      () => {
+        console.log("hit here 1", currentPanel);
+        dispose(currentPanel!);
+        currentPanel = undefined;
+      },
+      null,
+      context.subscriptions
+    );
   });
 };

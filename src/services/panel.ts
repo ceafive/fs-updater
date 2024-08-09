@@ -11,9 +11,8 @@ export const createWebviewPanel = (
   panel: vscode.WebviewPanel | undefined = undefined
 ) => {
   const columnToShowIn = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
-  console.log({ panel, columnToShowIn });
   if (panel) {
-    panel.reveal(vscode.ViewColumn.One + 1);
+    panel.reveal(columnToShowIn);
   } else {
     panel = vscode.window.createWebviewPanel(
       "featuresettings-updater.show",
@@ -31,17 +30,6 @@ export const createWebviewPanel = (
     // Set the webview's initial html content
     panel.webview.html = webview(panel, context);
   }
-
-  // // Listen for when the panel is disposed
-  panel.onDidDispose(
-    () => {
-      console.log("hit here 1", panel);
-      dispose(panel!);
-      panel = undefined;
-    },
-    null,
-    context.subscriptions
-  );
 
   //Listen to messages
   panel.webview.onDidReceiveMessage(
