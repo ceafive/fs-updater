@@ -13,7 +13,7 @@
   "license": "https://github.com/ceafive/fs-updater/blob/main/LICENSE.md",
   "homepage": "https://github.com/ceafive/fs-updater/blob/main/README.md",
   "description": "A Visual Studio Code extension that updates a settings file based on the extension settings.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.91.0"
   },

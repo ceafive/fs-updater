@@ -10,7 +10,7 @@ type EmpireDataProps = {
 
 const EmpireData = ({ selected, databoxRef, json, newlyAdded, vscode }: EmpireDataProps) => {
   return (
-    <div className="w-full">
+    <div className="">
       <h1 className="mb-1">{selected} Settings</h1>
       <div
         ref={databoxRef}
@@ -18,16 +18,11 @@ const EmpireData = ({ selected, databoxRef, json, newlyAdded, vscode }: EmpireDa
       >
         {Object.entries(json["Empire"]["Settings"])?.map((prop) => {
           const [key, value]: [string, any] = prop;
-          const newValue = { ...(value as unknown as Record<string, any>) };
 
           return (
-            <div className="flex justify-between items-center">
-              <pre className={`${newlyAdded?.includes(key) ? "text-red-600" : "text-green-600"} py-1`}>
-                <span>{key}: </span>
-                <span>{JSON.stringify(newValue, null, 2)}</span>
-              </pre>
+            <div className="flex items-start py-2">
               <button
-                className="bg-red-500 text-white text-sm px-2 py-1"
+                className="bg-red-500 text-white text-sm px-2 py-1 mr-2 mt-1"
                 onClick={() =>
                   vscode.postMessage({
                     command: "confirm_delete",
@@ -38,6 +33,10 @@ const EmpireData = ({ selected, databoxRef, json, newlyAdded, vscode }: EmpireDa
               >
                 Delete
               </button>
+              <pre className={`${newlyAdded?.includes(key) ? "text-red-600" : "text-green-600"}`}>
+                <span>{key}: </span>
+                <span>{JSON.stringify(value, null, 2)}</span>
+              </pre>
             </div>
           );
         })}
