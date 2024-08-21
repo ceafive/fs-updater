@@ -79,6 +79,6 @@ export const createWebviewPanel = (
     null,
     context.subscriptions
   );
-  console.log("hit here 2", panel);
+
   return panel;
 };

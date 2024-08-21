@@ -156,7 +156,7 @@ const App = () => {
                 <button
                   disabled={!newData?.length}
                   className={`${newData?.length ? "bg-blue-600" : "bg-gray-400"} text-white px-4 py-2 w-full`}
-                  onClick={() =>
+                  onClick={() => {
                     onAdd({
                       newData,
                       setNewlyAdded,
@@ -168,8 +168,8 @@ const App = () => {
                       language,
                       setJson,
                       databoxRef,
-                    })
-                  }
+                    });
+                  }}
                 >
                   Add
                 </button>

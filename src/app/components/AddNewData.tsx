@@ -14,7 +14,9 @@ const AddNewData = ({ newData, setNewData }: AddNewDataProps) => {
         placeholder="Enter properly parsed JSON data to avoid errors"
         className="w-full bg-gray-800 rounded-lg text-gray-50 text-sm p-2 font-extralight italic"
         value={newData}
-        onChange={(e) => setNewData(e.target.value)}
+        onChange={(e) => {
+          setNewData(e.target.value);
+        }}
       />
     </>
   );

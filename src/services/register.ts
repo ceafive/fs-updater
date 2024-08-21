@@ -16,7 +16,6 @@ export const register = (context: vscode.ExtensionContext): vscode.Disposable =>
     // // Listen for when the panel is disposed
     currentPanel.onDidDispose(
       () => {
-        console.log("hit here 1", currentPanel);
         dispose(currentPanel!);
         currentPanel = undefined;
       },

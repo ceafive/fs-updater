@@ -53,7 +53,9 @@ export const onAdd = ({
       let [key, value] = data;
       key = key.replaceAll(":", "").replaceAll('""', '"').replaceAll('"', "").trim();
       setNewlyAdded((keys) => [...keys, key]);
-      value = value.replaceAll("},,", "},").replaceAll("},", "}").replaceAll(",}", "}");
+      value = value.replaceAll("},,", "},").replaceAll(",}", "}");
+      // value = value.replaceAll("},,", "},").replaceAll("},", "}").replaceAll(",}", "}");
+
       try {
         const newValue = JSON.parse(value);
         if (selected === "Empire") {
@@ -256,13 +258,15 @@ export const onAdd = ({
           }
         }
       } catch (error) {
-        console.log("hfdffa");
+        alert("Invalid JSON format");
+        console.log(error);
       }
     });
 
     setJson(newJson);
     databoxRef.current!.scrollTop = databoxRef.current!.scrollHeight + 100;
   } catch (error) {
+    alert("Invalid JSON format");
     console.error(error);
   }
 };
